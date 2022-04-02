@@ -6,5 +6,7 @@ Created by Bill Valaski (bill.valaski@gmail.com)
 
 History:
 - Original books read recorded using the Han dBase application with mobile
-and Windows applications
+and Windows applications.
+- Transfer records to mySQL and create relational tables
+
 2022-01 to 2022_03 - Initial Books controller and views

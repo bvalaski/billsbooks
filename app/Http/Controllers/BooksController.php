@@ -28,7 +28,7 @@ class BooksController extends Controller
 */
    //     $Books = 'TESTING only';
        
-        return view('pages.index',compact(['books']));
+        return view('books.index',compact(['books']));
     }
 
  /**
@@ -38,7 +38,7 @@ class BooksController extends Controller
      */
     public function create()
     {
-        return view('pages.create');
+        return view('books.create');
     }
 
     /**
@@ -53,7 +53,7 @@ class BooksController extends Controller
          $request->validate([
           'title' => 'required',
           'date_read' => 'required',
-          'isbn' => 'numeric'
+          'isbn' => 'nullable | numeric'
           ]);
           
         //create book record
@@ -80,7 +80,7 @@ class BooksController extends Controller
           $bkurl = "https://covers.openlibrary.org/b/isbn/" . $bkisbn . "-M.jpg";}
 
   
-        return view('pages.show', compact('book', 'bkurl'));
+        return view('books.show', compact('book', 'bkurl'));
        
     }
 
@@ -107,7 +107,7 @@ class BooksController extends Controller
           $bkurl = "https://covers.openlibrary.org/b/isbn/" . $bkisbn . "-M.jpg";}
 
 
-       return view('pages.edit', compact('book', 'bkurl'));
+       return view('books.edit', compact('book', 'bkurl'));
     }
 
     /**
@@ -124,7 +124,7 @@ class BooksController extends Controller
         $request->validate([
           'title' => 'required',
           'date_read' => 'required',
-          'isbn' => 'numeric'
+          'isbn' => 'nullable | numeric'
           ]);
           
         //create book record

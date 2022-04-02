@@ -43,6 +43,7 @@ class BooksController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *   MAKE SURE to update the validation in the update function
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -112,6 +113,7 @@ class BooksController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *   MAKE SURE to update the validation in the store function
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id

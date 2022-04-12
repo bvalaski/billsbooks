@@ -2,12 +2,15 @@
 @section('title','Bills Books Home')
 @section('content')
 
+<div class="container">
 <div class="row">
-   <div class="col-lg-12">
+   <div class="col-med-5 col-lg-10">
       <div class="pull-left">
         <h2>Show books</h2>
       </div>
-      <div class="pull-right">
+    </div>
+      <div class="col-med-1 col-lg-2">
+        <div class="pull-right">
         <a class="btn btn-success" href="{{route('Books.create')}}"> Create new Book</a>
       </div>
    </div>
@@ -19,7 +22,7 @@
   </div>
 @endif
 
-<table class ="table table-bordered" >
+<table class ="table table-bordered border-dark table-striped" >
   <tr>
     <th>Title</th>
     <th>Author</th>
@@ -35,11 +38,11 @@
     <td>{{$book->date_read }}</td>
     <td>
       <form action="{{ route('Books.destroy',$book->id) }}" method="POST">
-      <a class="btn btn-info" href="{{ route('Books.show', $book->id) }}">Show</a>
-      <a class="btn btn-primary" href="{{ route('Books.edit', $book->id) }}">Edit</a>
+      <a class="btn btn-info btn-sm" href="{{ route('Books.show', $book->id) }}">Show</a>
+      <a class="btn btn-primary btn-sm" href="{{ route('Books.edit', $book->id) }}">Edit</a>
       @csrf
       @method('delete')
-      <button type="submit" class="btn btn-danger">Delete</button>
+      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
       </form>
      </td>
    </tr>
@@ -49,4 +52,5 @@
 </table>
 
 {{ $books->links() }}
+</div>
 @endsection

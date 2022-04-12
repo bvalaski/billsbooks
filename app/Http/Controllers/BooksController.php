@@ -78,7 +78,7 @@ class BooksController extends Controller
         if($bkisbn=="") {
           $bkurl = "/img/Daco_5339804.png"; }
         else {
-          $bkurl = "https://covers.openlibrary.org/b/isbn/" . $bkisbn . "-M.jpg";}
+          $bkurl = "https://covers.openlibrary.org/b/isbn/" . $bkisbn . "-L.jpg";}
 
   
         return view('books.show', compact('book', 'bkurl'));
@@ -105,7 +105,7 @@ class BooksController extends Controller
         if($bkisbn=="") {
           $bkurl = "/img/Daco_5339804.png"; }
         else {
-          $bkurl = "https://covers.openlibrary.org/b/isbn/" . $bkisbn . "-M.jpg";}
+          $bkurl = "https://covers.openlibrary.org/b/isbn/" . $bkisbn . "-L.jpg";}
 
 
        return view('books.edit', compact('book', 'bkurl'));

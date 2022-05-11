@@ -20,15 +20,8 @@ class BooksController extends Controller
 
      $books = Book::latest();
      $books = $books->orderByDesc('date_read')->paginate(10);
-     /**$books = DB::table('books')
-        ->join('genres','books.genre_id','=', 'genres.id')
-        ->join('authors','books.author_id','=', 'authors.id')
-        ->select('books.id','title','date_read','genres.genre','authors.lastname', 'authors.firstname')
-        ->paginate(10);
-*/
-   //     $Books = 'TESTING only';
-       
-        return view('books.index',compact(['books']));
+     
+     return view('books.index',compact(['books']));
     }
 
  /**
@@ -38,7 +31,13 @@ class BooksController extends Controller
      */
     public function create()
     {
-        return view('books.create');
+      $auth_list =  DB::table('authors')->orderBy('lastname')->get();
+      $coauth_list =  DB::table('authors')->orderBy('lastname')->get();
+      $genres_list = DB::table('genres')->orderBy('genre')->get();
+      $owned_list = DB::table('owned')->orderBy('owned_status')->get();
+      $series_list =  DB::table('series')->orderBy('series')->get();
+ 
+         return view('books.create',compact(['auth_list','coauth_list','genres_list', 'owned_list','series_list']));
     }
 
     /**
@@ -50,6 +49,22 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
+
+    $new_author_id = $request->input('author_id');
+    if ($new_author_id == "Author") {
+      $request->merge(['author_id' => 1]);
+    }
+
+    $new_coauthor_id = $request->input('coauthor_id');
+    if ($new_coauthor_id == "Co-Author") {
+      $request->merge(['coauthor_id' => 1]);
+    }
+  
+    $new_series_id = $request->input('series_id');
+    if ($new_series_id == "Series") {
+      $request->merge(['series_id' => NULL]);
+    }
+//    dd($request->all(), $new_author_id, $new_coauthor_id);
         // validate inputs
          $request->validate([
           'title' => 'required',
@@ -92,10 +107,9 @@ class BooksController extends Controller
      * @return \Illuminate\Http\Response
      * 
      *         $gname = genre::find($book->genre_id)->genre;
-        $authrec = author::find($book->author_id);
-        $author = $authrec->lastname . ", " . $authrec->firstname;
-        
-
+     *   $authrec = author::find($book->author_id);
+     *   $author = $authrec->lastname . ", " . $authrec->firstname;
+     *
      */
     public function edit($id)
     {

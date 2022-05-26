@@ -42,11 +42,11 @@
       </div>
       <div class="form-group">
         <strong>Co-author:</strong>
-        To be set
+        {{ $bk_coauth }}
       </div>
       <div class="form-group">
         <strong>Publication Year:</strong>
-        To be set
+        {{ $book->published }}
       </div>
        <div class="form-group">
         <strong>Genre:</strong>
@@ -54,7 +54,7 @@
       </div>
        <div class="form-group">
         <strong>Series:</strong>
-        To be set
+        {{ $bk_series }}
       </div>
        <div class="form-group">
         <strong>Date read:</strong>
@@ -62,11 +62,11 @@
       </div>
       <div class="form-group">
         <strong>Rating:</strong>
-        To be set
+        {{ $book->rating }}
       </div>
       <div class="form-group">
         <strong>Owned:</strong>
-        To be set
+        {{ $book->owned->owned_status }}
       </div>
       <div class="form-group">
         <strong>Comments:</strong>

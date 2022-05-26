@@ -60,8 +60,8 @@
     </div>
     <div class="col-xs-2 col-sm-2 col-md-2">
       <div class "form-group">
-        <strong>Rating:</strong>
-        <input type="text" name="rating" class="form-control" placeholder="Rating">
+        <strong>Rating (1=Great 10=Didn't finish)</strong>
+        <input type="integer" name="rating" class="form-control" placeholder="Rating">
       </div>
     </div>
     <div class="col-xs-2 col-sm-2 col-md-2">
@@ -106,9 +106,11 @@
       </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
-      <div class "form-group">
-        <strong>Comments:</strong>
-        <input type="text" name="comments" class="form-control" placeholder="Book description">
+      <div class="row mb-1 mt-3"">
+        <div class="form-floating">
+          <textarea class="form-control" placeholder="Description" id="get_comments" name="comments" style="height: 100px"></textarea>
+          <label for="get_comments">Book Description</label>
+        </div>
       </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 text-center py-3">

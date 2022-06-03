@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\genre;
 
 class GenresController extends Controller
 {
@@ -14,6 +16,8 @@ class GenresController extends Controller
     public function index()
     {
         //
+        return view('genres.index');
+ 
     }
 
     /**

@@ -23,4 +23,7 @@ class PagesController extends Controller
         return view('pages.genres');
     }
 
+    public function series() {
+        return view('pages.series');
+    }
 }

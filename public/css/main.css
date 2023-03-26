@@ -25,3 +25,8 @@ body {
     position: absolute;
     z-index: -1;   
   }
+
+  .list-group{
+    max-height: 75vh;
+    overflow: scroll;
+  }

@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Livewire\LWAuthors;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +22,10 @@ Route::get('/home',    [PagesController::class,'home']);
 Route::get('/authors', [PagesController::class,'authors']);
 Route::get('/genres',  [PagesController::class,'genres']);
 Route::get('/series',  [PagesController::class,'series']);
+
+Route::get('/LWAuthors', function (){
+    return view('authors.lwauth');
+});
 
 Route::Resource('Books', 'App\Http\Controllers\BooksController');
 Route::Resource('Genres', 'App\Http\Controllers\GenresController');

@@ -4,19 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+// Use "return view()" to display an HTML page
+// User "retun redirect()" to pass to the controller-based pages
+
 class PagesController extends Controller
 {
     // Home and Index are both the root of the site
     public function index() {
-        return view('pages.index');
+        return redirect('Books');
     }
 
     public function home() {
-        return view('pages.index');
+        return redirect('Books');
     }
 
     public function authors() {
-        return view('pages.authors');
+        return redirect('Authors');
     }
 
     public function genres() {

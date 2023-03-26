@@ -3,19 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\author;
 
 class AuthorsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the authors and associated books.
+     * 
+     * Initially, ID=1 is set to show the "default" missing author record
+     *    and it's records
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        return view('authors.index');
 
+        return view('authors.index');
     }
 
     /**
@@ -45,9 +49,9 @@ class AuthorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        // 
     }
 
     /**

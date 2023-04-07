@@ -1,18 +1,30 @@
-BillsBooks
+# BillsBooks
+
 A learning exercise for the Laravel framework and the development of a web front end
-for tracking the books read and owned
+for tracking the books I've read and owned
 
 Created by Bill Valaski (bill.valaski@gmail.com)
 
-The app uses 
-- Bootstrap 5 for CSS
-- Laravel for the web framework
-- mySQL for database
-- OpenLibrary (https://openlibrary.org/) for access to the "free" book covers
+## The app uses
 
-History:
-- Original books read recorded using the Han dBase application with mobile
+- Bootstrap 5 for CSS
+- Laravel fo r the web framework
+- Livewire for additional functionality
+- mySQL for database
+- OpenLibrary (<https://openlibrary.org/>) for access to the "free" book covers
+
+## History
+
+### 2022-01 to 2022_03 - Initial Books controller and views
+
+- Original books read were recorded using the Han dBase application with mobile
 and Windows applications.
 - Transfer records to mySQL and create relational tables
+- CRUD access to books table
 
-2022-01 to 2022_03 - Initial Books controller and views
+### 2022_06 to 2022-03 - Authors controller using Livewire
+
+- Use Livewire to add interactive update of book list after selecting and author
+- Build out CRUD features for updating authors and their associated books
+
+### 2023_04 - Genres controller

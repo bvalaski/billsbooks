@@ -9,14 +9,23 @@ use App\Models\genre;
 class GenresController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the genres along with a count of the
+     *   number of books associated.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         //
-        return view('genres.index');
+
+        $genre_book_count = genre::select("id","genre")->withCount('book')->get();
+        
+     //   $books = Book::latest();
+     //   $books = $books->orderByDesc('date_read')->paginate(10);
+    
+     //   return view('books.index', compact(['books']));
+        
+        return view('genres.index', compact(['genre_book_count']));
  
     }
 

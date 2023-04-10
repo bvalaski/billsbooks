@@ -27,4 +27,11 @@ and Windows applications.
 - Use Livewire to add interactive update of book list after selecting and author
 - Build out CRUD features for updating authors and their associated books
 
-### 2023_04 - Genres controller
+### 2023_04 - Genres / Series / Owned Status controllers
+
+- Built using Livewire and modal dialog features
+- CRUD features for the addition and modification of book
+
+-- Genres (ie Mystery, Fiction, etc)
+-- Series (ie Star Wars, Jack Reacher, etc)
+-- Owned Status (Paperback, Hardback, Kindle, etc.)

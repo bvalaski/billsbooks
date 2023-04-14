@@ -22,6 +22,7 @@ Route::get('/home',    [PagesController::class,'home']);
 Route::get('/authors', [PagesController::class,'authors']);
 Route::get('/genres',  [PagesController::class,'genres']);
 Route::get('/series',  [PagesController::class,'series']);
+Route::get('/owned',   [PagesController::class,'owned']);
 
 Route::get('/LWAuthors', function (){
     return view('authors.lwauth');
@@ -31,6 +32,7 @@ Route::Resource('Books', 'App\Http\Controllers\BooksController');
 Route::Resource('Genres', 'App\Http\Controllers\GenresController');
 Route::Resource('Authors', 'App\Http\Controllers\AuthorsController');
 Route::Resource('Series', 'App\Http\Controllers\SeriesController');
+Route::Resource('Owned', 'App\Http\Controllers\OwnedController');
 
 // Auth::routes();
 

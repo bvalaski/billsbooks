@@ -18,5 +18,9 @@
       <a class="nav-link {{ (request()->is('Series*')) ? 'active' : '' }}" id="series_tab"
         href="{{ route('Series.index') }}">Series</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link {{ (request()->is('Owned*')) ? 'active' : '' }}" id="owned_tab"
+        href="{{ route('Owned.index') }}">Owned</a>
+    </li>
   </ul>
 </div>

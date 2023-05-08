@@ -24,10 +24,10 @@ class CreateBooksTable extends Migration
         Schema::create('books', function (Blueprint $table) {
            $table->id();
            $table->string('title');
-           $table->string('isbn');
-           $table->integer('published')->default(1900);
-           $table->date('date_read');
-           $table->integer('rating')->default(0);
+           $table->string('isbn')->nullable();
+           $table->integer('published')->nullable()->default(1900);
+           $table->date('date_read')->nullable();
+           $table->integer('rating')->nullable()->default(0);
 
            $table->unsignedBigInteger('genre_id')->default(1); 
            $table->foreign('genre_id')->references('id')->on('genres');
@@ -35,16 +35,16 @@ class CreateBooksTable extends Migration
            $table->unsignedBigInteger('author_id')->default(1); 
            $table->foreign('author_id')->references('id')->on('authors');
 
-           $table->unsignedBigInteger('coauthor_id')->nullable(); 
+           $table->unsignedBigInteger('coauthor_id')->default(1); 
            $table->foreign('coauthor_id')->references('id')->on('authors');
 
-           $table->unsignedBigInteger('series_id')->nullable(); 
+           $table->unsignedBigInteger('series_id')->default(1); 
            $table->foreign('series_id')->references('id')->on('series');
 
            $table->unsignedBigInteger('owned_id')->default(1);
            $table->foreign('owned_id')->references('id')->on('owned');
 
-           $table->string('comments');
+           $table->string('comments')->nullable();
            $table->timestamps();
         });
     }

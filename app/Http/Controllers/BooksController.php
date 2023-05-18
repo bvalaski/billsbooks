@@ -135,7 +135,8 @@ class BooksController extends Controller
   {
     //Load the select lists
     $auth_list =  DB::table('authors')->orderBy('lastname')->get();
-    $coauth_list =  DB::table('authors')->orderBy('lastname')->get();
+    $coauth_list =  $auth_list;
+ //   $coauth_list =  DB::table('authors')->orderBy('lastname')->get();
     $genres_list = DB::table('genres')->orderBy('genre')->get();
     $owned_list = DB::table('owned')->orderBy('owned_status')->get();
     $series_list =  DB::table('series')->orderBy('series')->get();
@@ -160,15 +161,15 @@ class BooksController extends Controller
       $bk_series =  $book->series->series;
     }
 
-    // If no co-authorselected, show a blank value, otherwise get the co-author name  
+    // If no author selected, show a blank value, otherwise get the author name  
     $check_val = $book->author_id;
     if ($check_val == NULL) {
-      $bk_serie = "";
+      $bk_author = "";
     } else {
       $bk_author = $book->author->lastname . ", " . $book->author->firstname;
     }
 
-    // If no co-authorselected, show a blank value, otherwise get the co-author name  
+    // If no co-author selected, show a blank value, otherwise get the co-author name  
     $check_val = $book->coauthor_id;
     if ($check_val == NULL) {
       $bk_coauth = "";
@@ -177,6 +178,7 @@ class BooksController extends Controller
     }
     
 //    dd($bk_series,$bk_author, $bk_coauth);
+// dd($book, $bkurl, $auth_list, $coauth_list);
     return view('books.edit', compact(['book', 'bkurl', 'bk_author', 'bk_coauth', 'bk_series', 'auth_list', 'coauth_list', 'genres_list', 'owned_list', 'series_list']));
   }
 

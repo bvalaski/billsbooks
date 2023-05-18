@@ -48,7 +48,7 @@
       <select class="form-select" name="coauthor_id" aria-label="Co-Author">
         <option selected>Co-Author</option>
         @foreach ($coauth_list as $coauthor_label)
-        <option value="{{$coauthor_label->id}}">{{$coauthor_label->lastname.", ".$author_label->firstname}}</option>
+        <option value="{{$coauthor_label->id}}">{{$coauthor_label->lastname.", ".$coauthor_label->firstname}}</option>
         @endforeach
       </select>
     </div>

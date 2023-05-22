@@ -33,8 +33,8 @@
  @foreach ($books as $book)
   <tr>
     <td>{{$book->title }}</td>
-    <td>{{$book->author->lastname . ", " . $book->author->firstname }}</td>
-    <td>{{$book->genre->genre}}</td>
+    <td>{{$book->Author->lastname . ", " . $book->Author->firstname }}</td>
+    <td>{{$book->Genre->genre}}</td>
     <td>{{$book->date_read }}</td>
     <td>
       <form action="{{ route('Books.destroy',$book->id) }}" method="POST">

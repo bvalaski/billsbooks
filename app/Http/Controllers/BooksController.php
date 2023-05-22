@@ -18,8 +18,7 @@ class BooksController extends Controller
   public function index()
   {
 
-    $books = Book::latest();
-    $books = $books->orderByDesc('date_read')->paginate(10);
+   $books = Book::with('Author')->with('Genre')->orderByDesc('date_read')->paginate(10);
 
     return view('books.index', compact(['books']));
   }

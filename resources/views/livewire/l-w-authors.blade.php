@@ -2,7 +2,7 @@
   @include('livewire.add-author')
   @include('livewire.edit-author')
   @include('livewire.delete-author')
- {{-- @include('livewire.delete-book') --}}
+  {{-- @include('livewire.delete-book') --}}
 
   <div class="container">
     <div class="row">
@@ -24,7 +24,8 @@
               id="floatingTextarea"></textarea>
             <label for="floatingTextarea">Search</label>
           </div>
-          <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#addAuthorModal">Add Author</button>
+          <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#addAuthorModal">Add
+            Author</button>
           @csrf
         </form>
       </div>
@@ -43,9 +44,9 @@
               class="btn btn-danger mt-1 @if ($this->authID == 1) disabled  @endif" data-bs-toggle="modal"
               data-bs-target="#deleteAuthorModal">
               Delete Author</button>
-              <button type="button" wire:click.prevent="bookAdd({{$this->authID}})"
-                class="btn btn-primary mt-1 @if ($this->authID == 1) disabled  @endif">Add Book</button>
-             </div>
+            <button type="button" wire:click.prevent="bookAdd({{$this->authID}})"
+              class="btn btn-primary mt-1 @if ($this->authID == 1) disabled  @endif">Add Book</button>
+          </div>
         </div>
         {{-- Books related to Author, displayed with edit buttons --}}
         <div>
@@ -80,8 +81,12 @@
               </button>
             </td>
           </tr>
+
           @endforeach
         </table>
+
+        {{$book_list->links()}}
+
       </div>
     </div>
   </div>

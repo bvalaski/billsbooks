@@ -3,11 +3,17 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 use App\Models\author;
 use App\Models\book;
 
 class LWAuthors extends Component
 {
+
+    Use WithPagination;
+    
+    protected $paginationTheme = 'bootstrap';
+
     public $authID = "1";
     public $auth_name = "";
     public $auth_search = "";
@@ -16,6 +22,7 @@ class LWAuthors extends Component
     public $bookID;
     public $showaddAuthormodal = false;
     public $showeditAuthormodal = false;
+    public $paginator;
 
     public function mount()
     {
@@ -30,7 +37,7 @@ class LWAuthors extends Component
             return $query->where('lastname', 'LIKE', "%$this->auth_search%")
                 ->orWhere('firstname', 'LIKE', "%$this->auth_search%");
         })->withCount('book')->orderBy('lastname')->get();
-        $book_list = Author::find($this->authID)->book;
+        $book_list = Book::where('author_id','=',$this->authID)->paginate(5);
         $auth_info = Author::find($this->authID);
         //        $this->authSubmit();
         //dd($author_book_count ,$book_list,$auth_info);

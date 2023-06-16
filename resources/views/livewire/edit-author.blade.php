@@ -9,7 +9,7 @@
             <form wire:submit.prevent="authUpdate({{$this->authID}})">
                 <div class="modal-body">
                     <div class="form-floating mb-3">
-                        <input type="text" wire:model="firstname" placeholder="First name">
+                        <input type="text" wire:model="firstname" placeholder="First name" autofocus>
                         @error('firstname') <span class="error">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-floating mb-3">

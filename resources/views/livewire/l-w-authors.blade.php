@@ -59,6 +59,7 @@
         <table class="table table-bordered border-dark table-striped">
           <tr>
             <th>Title</th>
+            <th>Series</th>
             <th>Published</th>
             <th>Cover</th>
             <th>Action</th>
@@ -66,6 +67,7 @@
           @foreach ($book_list as $book)
           <tr style="height:80px">
             <td>{{$book->title }}</td>
+            <td>{{$book->Series->series}}</td>
             <td>{{$book->published }}</td>
             @if (empty($book->isbn))
             <td><img src="/img/Daco_5339804.png" class="img-fluid h-50" alt="Cover" width="60" height="60"></td>

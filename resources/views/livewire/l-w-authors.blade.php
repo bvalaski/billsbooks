@@ -21,7 +21,7 @@
           </select>
           <div class="form-floating">
             <textarea wire:model="auth_search" class="form-control" placeholder="Author Search"
-              id="floatingTextarea"></textarea>
+              id="floatingTextarea" autofocus></textarea>
             <label for="floatingTextarea">Search</label>
           </div>
           <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#addAuthorModal">Add

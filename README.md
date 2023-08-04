@@ -41,19 +41,19 @@ Created by Bill Valaski (bill.valaski@gmail.com)
 
 ## History
 
-### 2022-01 to 2022_03 - Initial Books controller and views
+### 2022-01 to 2022-03 - Initial Books controller and views
 
 - Original books read were recorded using the Han dBase application with mobile
 and Windows applications.
 - Transfer records to mySQL and create relational tables
 - CRUD access to books table
 
-### 2022_06 to 2022-03 - Authors controller using Livewire
+### 2022-06 to 2022-03 - Authors controller using Livewire
 
 - Use Livewire to add interactive update of book list after selecting and author
 - Build out CRUD features for updating authors and their associated books
 
-### 2023_04 - Genres / Series / Owned Status controllers
+### 2023-04 - Genres / Series / Owned Status controllers
 
 - Built using Livewire and modal dialog features
 - CRUD features for the addition and modification of book
@@ -62,7 +62,16 @@ and Windows applications.
 -- Series (ie Star Wars, Jack Reacher, etc)
 -- Owned Status (Paperback, Hardback, Kindle, etc.)
 
-### 2023_05 - Migration and Seeder file updates
+### 2023-05 - Migration and Seeder file updates
 
-- Table adjustments for import of my own data from mySQL.
+- Table adjustments for import of personal record data from mySQL.
 - Documentation of table creation (migrate) and record import (seed)
+
+### 2023-05 to 2023-08 - Authors controller updates
+
+- Addition of Series and Read Date to book list display.
+- Add pagination to book display.
+- Add Search feature to Authors list
+- Add logic to link co-authors to the book record.  Co-author book count will be fixed with future table updates.
+- Add logic to create Author record 1 (Missing Author) if initial table seeder is not executed.
+- Cleaned up Books table layout.

@@ -27,18 +27,43 @@ class LWAuthors extends Component
 
     public function mount()
     {
+        $isExist = Author::where('id', 1)
+            ->doesntExist();
+
+        if ($isExist) {
+            Author::create([
+                'id' => 1,
+                'firstname' => 'Author',
+                'lastname' => 'Missing'
+            ]);
+        } 
     }
 
     // Query the Books table and generate a count of books associated with each author.
     //    Search again for the individual records associated with the AuthID. 
     public function render()
     {
+// select count(*), authors.lastname from 
+//    ( select id,author_id as auth from books 
+//    UNION 
+//    SELECT id,coauthor_id as auth from books 
+//    where coauthor_id>1) as full 
+// left join authors on full.auth = authors.id 
+// group by full.auth 
+// order by authors.lastname;
+
+// SELECT title,author_id, authors.lastname, coauthor_id 
+// -- coauth.lastname 
+// FROM `books` left join authors on author_id=authors.id 
+// -- left join authors as coauth on coauthor_id=authors.id 
+// where coauthor_id>1;
+
 
         $author_book_count = Author::when($this->auth_search, function ($query, $auth_search) {
             return $query->where('lastname', 'LIKE', "%$this->auth_search%")
                 ->orWhere('firstname', 'LIKE', "%$this->auth_search%");
         })->withCount('book')->orderBy('lastname')->get();
-        $book_list = Book::where('author_id','=',$this->authID)->with('Series')->orderBy('published')->paginate(5);
+        $book_list = Book::where('author_id','=',$this->authID)->when($this->authID>1, function ($query) {return $query->orWhere('coauthor_id','=',$this->authID); })->with('Series')->orderBy('published')->paginate(5);
         $auth_info = Author::find($this->authID);
         //        $this->authSubmit();
         //dd($author_book_count ,$book_list,$auth_info);

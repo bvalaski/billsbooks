@@ -5,9 +5,14 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\series;
 use App\Models\book;
+use Livewire\WithPagination;
 
 class LWSeries extends Component
 {
+    Use WithPagination;
+    
+    protected $paginationTheme = 'bootstrap';
+
     public $seriesID = 1;
     public $seriesName = "";
     public $showaddSeriesmodal = true;
@@ -15,7 +20,7 @@ class LWSeries extends Component
 
     public function render()
     {
-        $series_book_count = series::select("id", "series")->withCount('book')->orderby('series')->get();
+        $series_book_count = series::select("id", "series")->withCount('book')->orderby('series')->paginate(10);
 
         return view('livewire.l-w-series', compact(['series_book_count']));
     }
@@ -38,6 +43,16 @@ class LWSeries extends Component
         ]);
         session()->flash('message', 'New Series record created');
         return redirect()->to('/Series');
+    }
+
+    // Redirect the viewer to the Books view with
+    //  a filter based on the series # 
+    public function seriesShow(int $seriesID)
+    {
+        $this->seriesID = $seriesID;
+
+        return redirect()->to('/Books/s' . $seriesID);
+
     }
 
     // Display the current genre name for editing

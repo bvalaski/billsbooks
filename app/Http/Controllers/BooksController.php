@@ -18,7 +18,7 @@ class BooksController extends Controller
   public function index()
   {
 
-   $books = Book::with('Author')->with('Genre')->orderByDesc('date_read')->paginate(10);
+    $books = Book::with('Author')->with('Genre')->orderByDesc('date_read')->paginate(10);
 
     return view('books.index', compact(['books']));
   }
@@ -87,13 +87,39 @@ class BooksController extends Controller
   }
 
   /**
-   * Display the specified resource.
+   * Display the specified book record based on ID.
+   *   If the ID starts with a letter, display a filtered list
+   *   of Genre, Owned, or Series
    *
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
   public function show($id)
   {
+    $filter = substr( $id, 0, 1); 
+    if ($filter == 's' || $filter == 'g' || $filter == 'o')
+
+       {
+        switch ($filter) {
+        case "g":
+          $dbfilter = 'genre_id';
+          break;
+        case "o":
+          $dbfilter = 'owned_id';
+          break;
+        case "s":
+          $dbfilter = 'series_id';
+          break;
+        }
+
+          $books = Book::with('Author')->with('Genre')->
+          where($dbfilter , "=", substr( $id, 1))->
+          orderByDesc('date_read')->paginate(10);
+
+          return view('books.index', compact(['books']));      
+
+       } else
+       {
     $book = Book::FindOrFail($id);
 
     // If ISBN is blank, show the "missing" book cover    
@@ -121,6 +147,8 @@ class BooksController extends Controller
     }
 
     return view('books.show', compact('book', 'bk_coauth', 'bkurl', 'bk_series'));
+  }
+
   }
 
   /**
@@ -244,5 +272,28 @@ class BooksController extends Controller
 
     // redirect user and send status
     return redirect()->route('Books.index')->with('success', 'Book record deleted successfully');
+  }
+
+  /**
+   * Re-use the existing Index view to present a
+   *  filtered list of books.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function filter($filter)
+  {
+
+    return 'Filter function called';
+
+  //   $col = substr($filter,0,1);
+  //   $colindex = ltrim($filter,$col);
+
+  //   return 'Index table '.$col.' lookup ='.$colindex;
+
+  // $books = Book::with('Author')->with('Genre')
+  //   ->where('author_id', '=', "15")
+  //   ->orderByDesc('date_read')->paginate(10);
+
+  //   return view('books.index', compact(['books']));
   }
 }

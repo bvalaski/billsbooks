@@ -35,7 +35,8 @@
                     <tr>
                         <th>Series</th>
                         <th width="100px">Book count</th>
-                        <th  class=text-center width="240px">Action</th>
+                        <th class=text-center width="180px">Label Action</th>
+                        <th width="150px"> </th>
                     </tr>
                     @endif
 
@@ -44,9 +45,6 @@
                         <td>{{$series->series }}</td>
                         <td class=text-center>{{$series->book_count }}</td>
                         <td class=text-center>
-                            <button type="button" wire:click.prevent="seriesShow({{$series->id}})"
-                                class="btn btn-primary mt-1" data-bs-toggle="modal" data-bs-target="">
-                                Show</button>
                             <button type="button" wire:click.prevent="seriesEdit({{$series->id}})"
                                 class="btn btn-warning mt-1" data-bs-toggle="modal" data-bs-target="#editSeriesModal">
                                 Edit</button>
@@ -54,6 +52,12 @@
                                 class="btn btn-danger mt-1" data-bs-toggle="modal" data-bs-target="#deleteSeriesModal">
                                 Delete</button>
                         </td>
+                        <td class=text-center>
+                            <button type="button" wire:click.prevent="seriesShow({{$series->id}})"
+                                class="btn btn-primary mt-1" data-bs-toggle="modal" data-bs-target="">
+                                Show Books</button>
+                        </td>
+
                     </tr>
                     @empty
                     {{-- <h1>No series created - please add one.</h1> --}}

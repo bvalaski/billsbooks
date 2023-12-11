@@ -3,19 +3,32 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Illuminate\Support\Facades\Session;
 use App\Models\genre;
 use App\Models\book;
+use Livewire\WithPagination;
 
 class LWGenres extends Component
 {
+    use WithPagination;
+
+    protected $paginationTheme = 'bootstrap';
+
     public $genreID = 1;
     public $genreName = "";
     public $showaddGenremodal = true;
     public $showeditGenremodal = true;
 
+public function mount()
+{
+        Session::forget('book_url');
+
+}
     public function render()
     {
-        $genre_book_count = genre::select("id", "genre")->withCount('book')->orderby('genre')->get();
+
+        $genre_book_count = genre::select("id", "genre")->withCount('book')
+            ->orderby('genre')->paginate(10);
 
         return view('livewire.l-w-genres', compact(['genre_book_count']));
     }
@@ -38,6 +51,15 @@ class LWGenres extends Component
         ]);
         session()->flash('message', 'New Genre record created');
         return redirect()->to('/Genres');
+    }
+
+    // Redirect the viewer to the Books view with
+    //  a filter based on the genre # 
+    public function genreShow(int $genreID)
+    {
+        $this->genreID = $genreID;
+
+        return redirect()->to('/Books/g' . $genreID);
     }
 
     // Display the current genre name for editing

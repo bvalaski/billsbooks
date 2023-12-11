@@ -16,7 +16,8 @@
                     </div>
                     <div class="col-med-4 col-lg-4">
                         <div class="pull-right">
-                            <button type="button" class="btn btn-primary mt-2 mb-2" data-bs-toggle="modal" data-bs-target="#addGenreModal">Create New Genre</button>
+                            <button type="button" class="btn btn-success mt-2 mb-2" data-bs-toggle="modal"
+                                data-bs-target="#addGenreModal">Create new Genre</button>
                         </div>
                     </div>
                 </div>
@@ -31,15 +32,16 @@
                     <tr>
                         <th>Genre</th>
                         <th width="100px">Book count</th>
-                        <th width="200px">Action</th>
+                        <th class=text-center width="180px">Label Action</th>
+                        <th width="150px"></th>
                     </tr>
 
                     @foreach ($genre_book_count as $genre)
                     <tr>
                         <td>{{$genre->genre }}</td>
-                        <td>{{$genre->book_count }}</td>
-                        <td>
-                            <button type="button" wire:click.prevent="genreEdit({{$genre->id}})"
+                        <td class=text-center>{{$genre->book_count }}</td>
+                        <td class=text-center>
+                             <button type="button" wire:click.prevent="genreEdit({{$genre->id}})"
                                 class="btn btn-warning mt-1 @if ($genre->id == 1) disabled  @endif "
                                 data-bs-toggle="modal" data-bs-target="#editGenreModal">
                                 Edit</button>
@@ -48,10 +50,16 @@
                                 data-bs-toggle="modal" data-bs-target="#deleteGenreModal">
                                 Delete</button>
                         </td>
+                        <td>
+                            <button type="button" wire:click.prevent="genreShow({{$genre->id}})"
+                                class="btn btn-primary mt-1" data-bs-toggle="modal" data-bs-target="">
+                                Show Books</button>
+                        </td>
                     </tr>
                     @endforeach
 
                 </table>
+                {{$genre_book_count->links()}}
             </div>
             <div class="col-med-3 col-lg-3">
             </div>

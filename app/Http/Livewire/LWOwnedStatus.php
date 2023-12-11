@@ -5,17 +5,28 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\owned;
 use App\Models\book;
+use Livewire\WithPagination;
+use Illuminate\Support\Facades\Session;
 
 class LWOwnedStatus extends Component
 {
+    Use WithPagination;
+    
+    protected $paginationTheme = 'bootstrap';
+
     public $ownedstatusID = 1;
     public $ownedstatusName = "";
     public $showaddOwnedmodal = true;
     public $showeditOwnedmodal = true;
 
-    public function render()
+    public function mount()
     {
-        $ownedstatus_book_count = owned::select("id", "owned_status")->withCount('book')->orderby('owned_status')->get();
+            Session::forget('book_url');
+    
+    }    public function render()
+    {
+        $ownedstatus_book_count = owned::select("id", "owned_status")->withCount('book')->
+        orderby('owned_status')->paginate(10);
 
         return view('livewire.l-w-owned-status', compact(['ownedstatus_book_count']));
     }
@@ -38,6 +49,16 @@ class LWOwnedStatus extends Component
         ]);
         session()->flash('message', 'New Owned Status record created');
         return redirect()->to('/Owned');
+    }
+
+    // Redirect the viewer to the Books view with
+    //  a filter based on the OwnedStatus # 
+    public function ownedstatusShow(int $ownedstatusID)
+    {
+        $this->ownedstatusID = $ownedstatusID;
+
+        return redirect()->to('/Books/o' . $ownedstatusID);
+
     }
 
     // Display the current genre name for editing

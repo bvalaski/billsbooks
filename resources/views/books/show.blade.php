@@ -18,7 +18,7 @@
   </div>
   <div class="col-lg-4 col-med-4">
       <div class="pull-right">
-        <a class="btn btn-primary" href="{{ route('Books.index') }}"> Back</a>
+        <a class="btn btn-primary" href="{{ session('book_url') }}"> Back</a>
       </div>
    </div>
    <div class="col-lg-5 col-med-2">

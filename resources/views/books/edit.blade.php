@@ -11,9 +11,10 @@
     <div class="col-lg-5">
       <div class="pull-left">
         <h2>Edit a book</h2>
+        
       </div>
       <div class="pull-right">
-        <a class="btn btn-primary" href="{{ URL::previous() }}"> Back</a>
+        <a class="btn btn-primary" href="{{session('book_url')}}"> Back</a>
       </div>
     </div>
     <div class="col-lg-6">

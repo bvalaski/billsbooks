@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\series;
 use App\Models\book;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Session;
 
 class LWSeries extends Component
 {
@@ -18,7 +19,12 @@ class LWSeries extends Component
     public $showaddSeriesmodal = true;
     public $showeditSeriesmodal = true;
 
-    public function render()
+    public function mount()
+    {
+            Session::forget('book_url');
+    
+    }
+        public function render()
     {
         $series_book_count = series::select("id", "series")->withCount('book')->orderby('series')->paginate(10);
 

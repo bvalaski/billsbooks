@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use App\Models\book;
 use App\Models\genre;
 use App\Models\author;
@@ -19,6 +20,8 @@ class BooksController extends Controller
   {
 
     $books = Book::with('Author')->with('Genre')->orderByDesc('date_read')->paginate(10);
+
+    Session::forget('book_url');
 
     return view('books.index', compact(['books']));
   }
@@ -96,11 +99,13 @@ class BooksController extends Controller
    */
   public function show($id)
   {
-    $filter = substr( $id, 0, 1); 
-    if ($filter == 's' || $filter == 'g' || $filter == 'o')
-
-       {
-        switch ($filter) {
+    if (! session()->has('book_url')){
+      session()->put('book_url',url()->current());
+    }
+    
+    $filter = substr($id, 0, 1);
+    if ($filter == 's' || $filter == 'g' || $filter == 'o') {
+      switch ($filter) {
         case "g":
           $dbfilter = 'genre_id';
           break;
@@ -110,45 +115,40 @@ class BooksController extends Controller
         case "s":
           $dbfilter = 'series_id';
           break;
-        }
+      }
 
-          $books = Book::with('Author')->with('Genre')->
-          where($dbfilter , "=", substr( $id, 1))->
-          orderByDesc('date_read')->paginate(10);
+      $books = Book::with('Author')->with('Genre')->where($dbfilter, "=", substr($id, 1))->orderByDesc('date_read')->paginate(10);
 
-          return view('books.index', compact(['books']));      
-
-       } else
-       {
-    $book = Book::FindOrFail($id);
-
-    // If ISBN is blank, show the "missing" book cover    
-    $check_val = $book->isbn;
-    if ($check_val == "") {
-      $bkurl = "/img/Daco_5339804.png";
+      return view('books.index', compact(['books']));
     } else {
-      $bkurl = "https://covers.openlibrary.org/b/isbn/" . $check_val . "-L.jpg";
+      $book = Book::FindOrFail($id);
+
+      // If ISBN is blank, show the "missing" book cover    
+      $check_val = $book->isbn;
+      if ($check_val == "") {
+        $bkurl = "/img/Daco_5339804.png";
+      } else {
+        $bkurl = "https://covers.openlibrary.org/b/isbn/" . $check_val . "-L.jpg";
+      }
+
+      // If no series selected, show a blank value    
+      $check_val = $book->series_id;
+      if ($check_val == NULL) {
+        $bk_series = "";
+      } else {
+        $bk_series =  $book->series->series;
+      }
+
+      // If no co-authorselected, show a blank value, otherwise get the co-author name  
+      $check_val = $book->coauthor_id;
+      if ($check_val == NULL) {
+        $bk_coauth = "";
+      } else {
+        $bk_coauth = $book->coauthor->lastname . ", " . $book->coauthor->firstname;
+      }
+
+      return view('books.show', compact('book', 'bk_coauth', 'bkurl', 'bk_series'));
     }
-
-    // If no series selected, show a blank value    
-    $check_val = $book->series_id;
-    if ($check_val == NULL) {
-      $bk_series = "";
-    } else {
-      $bk_series =  $book->series->series;
-    }
-
-    // If no co-authorselected, show a blank value, otherwise get the co-author name  
-    $check_val = $book->coauthor_id;
-    if ($check_val == NULL) {
-      $bk_coauth = "";
-    } else {
-      $bk_coauth = $book->coauthor->lastname . ", " . $book->coauthor->firstname;
-    }
-
-    return view('books.show', compact('book', 'bk_coauth', 'bkurl', 'bk_series'));
-  }
-
   }
 
   /**
@@ -160,10 +160,14 @@ class BooksController extends Controller
    */
   public function edit($id)
   {
+    if (! session()->has('book_url')){
+      session()->put('book_url',url()->current());
+    }
+
     //Load the select lists
     $auth_list =  DB::table('authors')->orderBy('lastname')->get();
     $coauth_list =  $auth_list;
- //   $coauth_list =  DB::table('authors')->orderBy('lastname')->get();
+    //   $coauth_list =  DB::table('authors')->orderBy('lastname')->get();
     $genres_list = DB::table('genres')->orderBy('genre')->get();
     $owned_list = DB::table('owned')->orderBy('owned_status')->get();
     $series_list =  DB::table('series')->orderBy('series')->get();
@@ -203,9 +207,9 @@ class BooksController extends Controller
     } else {
       $bk_coauth = $book->coauthor->lastname . ", " . $book->coauthor->firstname;
     }
-    
-//    dd($bk_series,$bk_author, $bk_coauth);
-// dd($book, $bkurl, $auth_list, $coauth_list);
+
+    //    dd($bk_series,$bk_author, $bk_coauth);
+    // dd($book, $bkurl, $auth_list, $coauth_list);
     return view('books.edit', compact(['book', 'bkurl', 'bk_author', 'bk_coauth', 'bk_series', 'auth_list', 'coauth_list', 'genres_list', 'owned_list', 'series_list']));
   }
 
@@ -220,7 +224,7 @@ class BooksController extends Controller
    */
   public function update(Request $request, $id)
   {
-//       dd($request->all());
+    //       dd($request->all());
 
     $request->validate([
       'title' => 'required',
@@ -255,6 +259,10 @@ class BooksController extends Controller
 
     $book->update($request->all());
 
+    if ($request->session()->has('book_url')) {
+      return redirect(session('book_url'));
+    }
+
     // redirect user and send status
     return redirect()->back()->with('success', 'Book updated successfully');
   }
@@ -274,26 +282,4 @@ class BooksController extends Controller
     return redirect()->route('Books.index')->with('success', 'Book record deleted successfully');
   }
 
-  /**
-   * Re-use the existing Index view to present a
-   *  filtered list of books.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function filter($filter)
-  {
-
-    return 'Filter function called';
-
-  //   $col = substr($filter,0,1);
-  //   $colindex = ltrim($filter,$col);
-
-  //   return 'Index table '.$col.' lookup ='.$colindex;
-
-  // $books = Book::with('Author')->with('Genre')
-  //   ->where('author_id', '=', "15")
-  //   ->orderByDesc('date_read')->paginate(10);
-
-  //   return view('books.index', compact(['books']));
-  }
 }

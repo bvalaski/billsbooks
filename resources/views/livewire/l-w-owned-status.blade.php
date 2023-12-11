@@ -16,8 +16,8 @@
                     </div>
                     <div class="col-med-5 col-lg-5">
                         <div class="pull-right">
-                            <button type="button" class="btn btn-primary mt-2 mb-2" data-bs-toggle="modal"
-                                data-bs-target="#addOwnedStatusModal">Create New owned status</button>
+                            <button type="button" class="btn btn-success mt-2 mb-2" data-bs-toggle="modal"
+                                data-bs-target="#addOwnedStatusModal">Create new Owned Status</button>
                         </div>
                     </div>
                 </div>
@@ -35,21 +35,30 @@
                     <tr>
                         <th>Owned Status</th>
                         <th width="100px">Book count</th>
-                        <th width="200px">Action</th>
+                        <th class=text-center width="180px">Label Action</th>
+                        <th width="150px"> </th>
                     </tr>
                     @endif
 
                     @forelse ($ownedstatus_book_count as $ownedstatus)
                     <tr>
-                        <td>{{$ownedstatus->owned_status }}</td>
-                        <td>{{$ownedstatus->book_count }}</td>
-                        <td>
+                        <td>{{$ownedstatus->owned_status }}
+                        </td>
+                        <td class=text-center>{{$ownedstatus->book_count }}</td>
+                        <td class=text-center>
                             <button type="button" wire:click.prevent="ownedstatusEdit({{$ownedstatus->id}})"
-                                class="btn btn-warning mt-1" data-bs-toggle="modal" data-bs-target="#editOwnedStatusModal">
+                                class="btn btn-warning mt-1" data-bs-toggle="modal"
+                                data-bs-target="#editOwnedStatusModal">
                                 Edit</button>
                             <button type="button" wire:click.prevent="ownedstatusDelLookup({{$ownedstatus->id}})"
-                                class="btn btn-danger mt-1" data-bs-toggle="modal" data-bs-target="#deleteOwnedStatusModal">
+                                class="btn btn-danger mt-1" data-bs-toggle="modal"
+                                data-bs-target="#deleteOwnedStatusModal">
                                 Delete</button>
+                        </td>
+                        <td class=text-center>
+                            <button type="button" wire:click.prevent="ownedstatusShow({{$ownedstatus->id}})"
+                                class="btn btn-primary mt-1" data-bs-toggle="modal" data-bs-target="">
+                                Show Books</button>
                         </td>
                     </tr>
                     @empty
@@ -57,6 +66,7 @@
                     @endforelse
 
                 </table>
+                {{$ownedstatus_book_count->links()}}
             </div>
             <div class="col-med-3 col-lg-3">
             </div>

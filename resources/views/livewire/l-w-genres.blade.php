@@ -42,7 +42,7 @@
                         <td class=text-center>{{$genre->book_count }}</td>
                         <td class=text-center>
                              <button type="button" wire:click.prevent="genreEdit({{$genre->id}})"
-                                class="btn btn-warning mt-1 @if ($genre->id == 1) disabled  @endif "
+                                class="btn btn-warning mt-1"
                                 data-bs-toggle="modal" data-bs-target="#editGenreModal">
                                 Edit</button>
                             <button type="button" wire:click.prevent="genreDelLookup({{$genre->id}})"

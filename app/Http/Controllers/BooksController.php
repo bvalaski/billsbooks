@@ -76,10 +76,11 @@ class BooksController extends Controller
 
     // validate inputs
     $request->validate([
-      'title' => 'required',
-      'date_read' => 'required',
+      'title' => 'required | max:253',
+      'date_read' => 'required | date',
       'rating' => 'numeric',
-      'isbn' => 'nullable | numeric'
+      'isbn' => 'nullable | numeric',
+      'comments' => 'max:253'
     ]);
 
     //create book record
@@ -227,10 +228,11 @@ class BooksController extends Controller
     //       dd($request->all());
 
     $request->validate([
-      'title' => 'required',
-      'date_read' => 'required',
+      'title' => 'required | max:253',
+      'date_read' => 'required | date',
       'rating' => 'numeric',
-      'isbn' => 'nullable | numeric'
+      'isbn' => 'nullable | numeric',
+      'comments' => 'max:253'
     ]);
 
     $new_author_id = $request->input('author_id');

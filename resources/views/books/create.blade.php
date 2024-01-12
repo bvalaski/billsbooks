@@ -60,8 +60,8 @@
     </div>
     <div class="col-xs-2 col-sm-2 col-md-2">
       <div class "form-group">
-        <strong>Rating (1=Great 10=Didn't finish)</strong>
-        <input type="number" name="rating" class="form-control" placeholder="Rating" step="1" min="0" max="10">
+        <strong>Rating</strong>
+        <input type="number" name="rating" class="form-control" placeholder="1=Poor 10=Great" step="1" min="0" max="10">
       </div>
     </div>
     <div class="col-xs-2 col-sm-2 col-md-2">

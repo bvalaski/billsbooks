@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Session;
 use App\Models\book;
 use App\Models\genre;
 use App\Models\author;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 
 class BooksController extends Controller
 {
@@ -73,11 +75,12 @@ class BooksController extends Controller
     }
 
     //    dd($request->all(), $new_author_id, $new_coauthor_id);
-
-    // validate inputs
+    
+    $tomorrow = Carbon::tomorrow();
     $request->validate([
+
       'title' => 'required | max:253',
-      'date_read' => 'required | date',
+      'date_read' => 'required | date | before_or_equal:tomorrow',
       'rating' => 'numeric',
       'isbn' => 'nullable | numeric',
       'comments' => 'max:253'
@@ -227,9 +230,11 @@ class BooksController extends Controller
   {
     //       dd($request->all());
 
+    $tomorrow = Carbon::tomorrow();
     $request->validate([
+
       'title' => 'required | max:253',
-      'date_read' => 'required | date',
+      'date_read' => 'required | date | before_or_equal:tomorrow',
       'rating' => 'numeric',
       'isbn' => 'nullable | numeric',
       'comments' => 'max:253'

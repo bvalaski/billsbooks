@@ -75,3 +75,9 @@ and Windows applications.
 - Add logic to link co-authors to the book record.  Co-author book count will be fixed with future table updates.
 - Add logic to create Author record 1 (Missing Author) if initial table seeder is not executed.
 - Cleaned up Books table layout.
+
+### 2023-09 to 2024-01 - Code cleanup, minor bug fixes
+- Save the URL for filtered displays og genre, series, owned so that after show/edit the filterdd display can be re-shown.
+- Updated the Genres view so the first genre can be edited but not deleted.
+- Misc fixes to add spinners for dates and rating, validation additions, and confirmation before deleting a record.
+

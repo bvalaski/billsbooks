@@ -66,12 +66,17 @@ class BooksController extends Controller
 
     $new_series_id = $request->input('series_id');
     if ($new_series_id == "Series") {
-      $request->merge(['series_id' => NULL]);
+      $request->merge(['series_id' => 1]);
     }
 
     $new_genre_id = $request->input('genre_id');
-    if ($new_genre_id == "Genre") {
-      $request->merge(['genre_id' => NULL]);
+    if ($new_genre_id == "Choose Genre") {
+      $request->merge(['genre_id' => 1]);
+    }
+
+    $new_owned_id = $request->input('owned_id');
+    if ($new_owned_id == "Book owned?") {
+      $request->merge(['owned_id' => 1]);
     }
 
     //    dd($request->all(), $new_author_id, $new_coauthor_id);
@@ -252,12 +257,17 @@ class BooksController extends Controller
 
     $new_series_id = $request->input('series_id');
     if ($new_series_id == "Series") {
-      $request->merge(['series_id' => NULL]);
+      $request->merge(['series_id' => 1]);
     }
 
     $new_genre_id = $request->input('genre_id');
-    if ($new_genre_id == "Genre") {
-      $request->merge(['genre_id' => NULL]);
+    if ($new_genre_id == "Choose Genre") {
+      $request->merge(['genre_id' => 1]);
+    }
+
+    $new_owned_id = $request->input('owned_id');
+    if ($new_owned_id == "Book owned?") {
+      $request->merge(['owned_id' => 1]);
     }
 
     //update the book record

@@ -13,11 +13,10 @@
         <h2>Edit a book</h2>
         
       </div>
-      <div class="pull-right">
-        <a class="btn btn-primary" href="{{session('book_url')}}"> Back</a>
-      </div>
+
     </div>
     <div class="col-lg-6">
+      <a class="btn btn-primary" href="{{session('book_url')}}"> Back</a>
 
     </div>
   </div>
@@ -45,7 +44,7 @@
       </div>
 
       <!-- row 2, col 2 book info -->
-      <div class="col-lg-5">
+      <div class="col-lg-6">
 
         <div class="row mb-1">
           <label for="get_title" class="col-auto col-form-label"><strong>Title:</strong></label>
@@ -89,12 +88,13 @@
 
         <div class="row mb-1">
           <label for="get_pub_date" class="col-auto col-form-label"><strong>Published:</strong></label>
-          <div class="col-sm-2">
-            <input class="form-control" type="integer" name="published" value="{{ $book->published }}"
-              id="get_pub_date">
+          <div class="col-sm-3">
+            <input class="form-control" type="number" name="published" value="{{ $book->published }}"
+              id="get_pub_date" step="1">
           </div>
+
           <label for=" get_pub_genre" class="col-auto col-form-label"><strong>Genre:</strong></label>
-          <div class="col-sm-6">
+          <div class="col-sm-5">
             <select class="form-select" name="genre_id" for="get_pub_date" aria-label="Genre select">
               <option selected>Genre</option>
               @foreach ($genres_list as $genre_label)
@@ -139,10 +139,10 @@
         </div>
         <div class="row mb-1">
           <label for="get_rating" class="col-auto col-form-label"><strong>Rating:</strong></label>
-          <div class="col-sm-2">
+          <div class="col-sm-3">
             <div class "form-group">
-              <input type="integer" name="rating" value="{{ $book->rating }}" id="get_rating" class="form-control"
-                placeholder="Rating">
+              <input type="number" name="rating" value="{{ $book->rating }}" id="get_rating" class="form-control"
+                placeholder="Rating" step="1" min="0" max="10">
             </div>
           </div>
           <label for="get_owned" class="col-auto col-form-label"><strong>Owned:</strong></label>
@@ -170,7 +170,7 @@
       </div>
 
       <!-- Row 2, col 3 Book cover image -->
-      <div class="col-lg-5">
+      <div class="col-lg-4">
         <img src={{ $bkurl }} class="img-fluid h-50" alt="Cover">
       </div>
 

@@ -7,6 +7,7 @@ use Livewire\WithPagination;
 use App\Models\author;
 use App\Models\book;
 use App\Models\series;
+use Illuminate\Support\Facades\Session;
 
 class LWAuthors extends Component
 {
@@ -37,6 +38,8 @@ class LWAuthors extends Component
                 'lastname' => 'Missing'
             ]);
         } 
+        
+        Session::forget('book_url');
     }
 
     // Query the Books table and generate a count of books associated with each author.

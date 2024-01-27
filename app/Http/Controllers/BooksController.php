@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Session;
 use App\Models\book;
 use App\Models\genre;
 use App\Models\author;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 
 class BooksController extends Controller
 {
@@ -64,22 +66,29 @@ class BooksController extends Controller
 
     $new_series_id = $request->input('series_id');
     if ($new_series_id == "Series") {
-      $request->merge(['series_id' => NULL]);
+      $request->merge(['series_id' => 1]);
     }
 
     $new_genre_id = $request->input('genre_id');
-    if ($new_genre_id == "Genre") {
-      $request->merge(['genre_id' => NULL]);
+    if ($new_genre_id == "Choose Genre") {
+      $request->merge(['genre_id' => 1]);
+    }
+
+    $new_owned_id = $request->input('owned_id');
+    if ($new_owned_id == "Book owned?") {
+      $request->merge(['owned_id' => 1]);
     }
 
     //    dd($request->all(), $new_author_id, $new_coauthor_id);
-
-    // validate inputs
+    
+    $tomorrow = Carbon::tomorrow();
     $request->validate([
-      'title' => 'required',
-      'date_read' => 'required',
+
+      'title' => 'required | max:253',
+      'date_read' => 'required | date | before_or_equal:tomorrow',
       'rating' => 'numeric',
-      'isbn' => 'nullable | numeric'
+      'isbn' => 'nullable | numeric',
+      'comments' => 'max:253'
     ]);
 
     //create book record
@@ -226,11 +235,14 @@ class BooksController extends Controller
   {
     //       dd($request->all());
 
+    $tomorrow = Carbon::tomorrow();
     $request->validate([
-      'title' => 'required',
-      'date_read' => 'required',
+
+      'title' => 'required | max:253',
+      'date_read' => 'required | date | before_or_equal:tomorrow',
       'rating' => 'numeric',
-      'isbn' => 'nullable | numeric'
+      'isbn' => 'nullable | numeric',
+      'comments' => 'max:253'
     ]);
 
     $new_author_id = $request->input('author_id');
@@ -245,12 +257,17 @@ class BooksController extends Controller
 
     $new_series_id = $request->input('series_id');
     if ($new_series_id == "Series") {
-      $request->merge(['series_id' => NULL]);
+      $request->merge(['series_id' => 1]);
     }
 
     $new_genre_id = $request->input('genre_id');
-    if ($new_genre_id == "Genre") {
-      $request->merge(['genre_id' => NULL]);
+    if ($new_genre_id == "Choose Genre") {
+      $request->merge(['genre_id' => 1]);
+    }
+
+    $new_owned_id = $request->input('owned_id');
+    if ($new_owned_id == "Book owned?") {
+      $request->merge(['owned_id' => 1]);
     }
 
     //update the book record

@@ -6,20 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Author extends Model
 {
-  protected $fillable = ['firstname','lastname'];
+    protected $fillable = ['firstname', 'lastname'];
 
-  public function book()
-  {
-    return $this->hasMany(book::class);
-  }
+    public function book()
+    {
+        return $this->hasMany(book::class);
+    }
 
-  public function authBookCount()
-  {
-    return $this->Author::withCount('book')->get();
-  }
+    public function authBookCount()
+    {
+        return $this->Author::withCount('book')->get();
+    }
 
-  public function authBooks($authID)
-  {
-    return $this->Author::find($authID)->book;
-  }
+    public function authBooks($authID)
+    {
+        return $this->Author::find($authID)->book;
+    }
 }

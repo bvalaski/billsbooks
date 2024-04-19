@@ -15,7 +15,7 @@ class SeriesSeeder extends Seeder
     public function run()
     {
         DB::table('series')->insert([
-            ['id' => 1, 'series' => "Individual story", ]
+            ['id' => 1, 'series' => 'Individual story'],
         ]);
         //
     }

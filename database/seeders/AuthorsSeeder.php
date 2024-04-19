@@ -4,8 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class AuthorsSeeder extends Seeder
 {
@@ -17,7 +15,7 @@ class AuthorsSeeder extends Seeder
     public function run()
     {
         DB::table('authors')->insert([
-          ['id' => 1, 'lastname' => "Author", 'firstname' => "Missing"]       
+            ['id' => 1, 'lastname' => 'Author', 'firstname' => 'Missing'],
         ]);
         //
     }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
-use Illuminate\Support\Facades\Session;
-use App\Models\genre;
 use App\Models\book;
+use App\Models\genre;
+use Illuminate\Support\Facades\Session;
+use Livewire\Component;
 use Livewire\WithPagination;
 
 class LWGenres extends Component
@@ -15,23 +15,28 @@ class LWGenres extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $genreID = 1;
-    public $genreName = "";
+
+    public $genreName = '';
+
     public $showaddGenremodal = true;
+
     public $showeditGenremodal = true;
 
-public function mount()
-{
+    public function mount()
+    {
         Session::forget('book_url');
 
-}
+    }
+
     public function render()
     {
 
-        $genre_book_count = genre::select("id", "genre")->withCount('book')
+        $genre_book_count = genre::select('id', 'genre')->withCount('book')
             ->orderby('genre')->paginate(10);
 
         return view('livewire.l-w-genres', compact(['genre_book_count']));
     }
+
     protected $rules = [
         'genreName' => 'required|min:2',
     ];
@@ -50,20 +55,21 @@ public function mount()
             'genre' => $this->genreName,
         ]);
         session()->flash('message', 'New Genre record created');
+
         return redirect()->to('/Genres');
     }
 
     // Redirect the viewer to the Books view with
-    //  a filter based on the genre # 
+    //  a filter based on the genre #
     public function genreShow(int $genreID)
     {
         $this->genreID = $genreID;
 
-        return redirect()->to('/Books/g' . $genreID);
+        return redirect()->to('/Books/g'.$genreID);
     }
 
     // Display the current genre name for editing
-    //   edit-genre modal included in main blade file 
+    //   edit-genre modal included in main blade file
     public function genreEdit(int $genreID)
     {
         $this->genreID = $genreID;
@@ -76,7 +82,7 @@ public function mount()
         $this->validate();
 
         Genre::where('id', $this->genreID)->update([
-            'genre' => $this->genreName
+            'genre' => $this->genreName,
         ]);
 
         session()->flash('message', 'Genre record updated');
@@ -95,7 +101,7 @@ public function mount()
     {
         $this->genreID = $genreID;
         Book::where('genre_id', $this->genreID)->update([
-            'genre_id' => 1
+            'genre_id' => 1,
         ]);
 
         $genreRecord = Genre::find($this->genreID);
@@ -103,6 +109,7 @@ public function mount()
         $this->genreID = 1;
 
         session()->flash('message', 'Genre record deleted');
+
         return redirect()->to('/Genres');
     }
 }

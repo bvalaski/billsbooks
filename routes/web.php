@@ -28,11 +28,11 @@ Route::get('/LWAuthors', function () {
     return view('authors.lwauth');
 });
 
-Route::Resource('Books', 'App\Http\Controllers\BooksController');
-Route::Resource('Genres', 'App\Http\Controllers\GenresController');
-Route::Resource('Authors', 'App\Http\Controllers\AuthorsController');
-Route::Resource('Series', 'App\Http\Controllers\SeriesController');
-Route::Resource('Owned', 'App\Http\Controllers\OwnedController');
+Route::Resource('Books', \App\Http\Controllers\BooksController::class);
+Route::Resource('Genres', \App\Http\Controllers\GenresController::class);
+Route::Resource('Authors', \App\Http\Controllers\AuthorsController::class);
+Route::Resource('Series', \App\Http\Controllers\SeriesController::class);
+Route::Resource('Owned', \App\Http\Controllers\OwnedController::class);
 
 // Auth::routes();
 

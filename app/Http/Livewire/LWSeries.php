@@ -2,34 +2,39 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
-use App\Models\series;
 use App\Models\book;
-use Livewire\WithPagination;
+use App\Models\series;
 use Illuminate\Support\Facades\Session;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class LWSeries extends Component
 {
-    Use WithPagination;
-    
+    use WithPagination;
+
     protected $paginationTheme = 'bootstrap';
 
     public $seriesID = 1;
-    public $seriesName = "";
+
+    public $seriesName = '';
+
     public $showaddSeriesmodal = true;
+
     public $showeditSeriesmodal = true;
 
     public function mount()
     {
-            Session::forget('book_url');
-    
+        Session::forget('book_url');
+
     }
-        public function render()
+
+    public function render()
     {
-        $series_book_count = series::select("id", "series")->withCount('book')->orderby('series')->paginate(10);
+        $series_book_count = series::select('id', 'series')->withCount('book')->orderby('series')->paginate(10);
 
         return view('livewire.l-w-series', compact(['series_book_count']));
     }
+
     protected $rules = [
         'seriesName' => 'required|min:2',
     ];
@@ -48,21 +53,22 @@ class LWSeries extends Component
             'series' => $this->seriesName,
         ]);
         session()->flash('message', 'New Series record created');
+
         return redirect()->to('/Series');
     }
 
     // Redirect the viewer to the Books view with
-    //  a filter based on the series # 
+    //  a filter based on the series #
     public function seriesShow(int $seriesID)
     {
         $this->seriesID = $seriesID;
 
-        return redirect()->to('/Books/s' . $seriesID);
+        return redirect()->to('/Books/s'.$seriesID);
 
     }
 
     // Display the current genre name for editing
-    //   edit-genre modal included in main blade file 
+    //   edit-genre modal included in main blade file
     public function seriesEdit(int $seriesID)
     {
         $this->seriesID = $seriesID;
@@ -76,7 +82,7 @@ class LWSeries extends Component
         $this->validate();
 
         Series::where('id', $this->seriesID)->update([
-            'series' => $this->seriesName
+            'series' => $this->seriesName,
         ]);
 
         session()->flash('message', 'Series record updated');
@@ -95,7 +101,7 @@ class LWSeries extends Component
     {
         $this->seriesID = $seriesID;
         Book::where('series_id', $this->seriesID)->update([
-            'series_id' => null
+            'series_id' => null,
         ]);
 
         $seriesRecord = Series::find($this->seriesID);
@@ -103,6 +109,7 @@ class LWSeries extends Component
         $this->seriesID = 1;
 
         session()->flash('message', 'Series record deleted');
+
         return redirect()->to('/Series');
     }
 }

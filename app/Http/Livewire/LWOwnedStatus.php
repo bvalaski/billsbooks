@@ -2,34 +2,40 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
-use App\Models\owned;
 use App\Models\book;
-use Livewire\WithPagination;
+use App\Models\owned;
 use Illuminate\Support\Facades\Session;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class LWOwnedStatus extends Component
 {
-    Use WithPagination;
-    
+    use WithPagination;
+
     protected $paginationTheme = 'bootstrap';
 
     public $ownedstatusID = 1;
-    public $ownedstatusName = "";
+
+    public $ownedstatusName = '';
+
     public $showaddOwnedmodal = true;
+
     public $showeditOwnedmodal = true;
 
     public function mount()
     {
-            Session::forget('book_url');
-    
-    }    public function render()
+        Session::forget('book_url');
+
+    }
+
+    public function render()
     {
-        $ownedstatus_book_count = owned::select("id", "owned_status")->withCount('book')->
+        $ownedstatus_book_count = owned::select('id', 'owned_status')->withCount('book')->
         orderby('owned_status')->paginate(10);
 
         return view('livewire.l-w-owned-status', compact(['ownedstatus_book_count']));
     }
+
     protected $rules = [
         'ownedstatusName' => 'required|min:2',
     ];
@@ -48,21 +54,22 @@ class LWOwnedStatus extends Component
             'owned_status' => $this->ownedstatusName,
         ]);
         session()->flash('message', 'New Owned Status record created');
+
         return redirect()->to('/Owned');
     }
 
     // Redirect the viewer to the Books view with
-    //  a filter based on the OwnedStatus # 
+    //  a filter based on the OwnedStatus #
     public function ownedstatusShow(int $ownedstatusID)
     {
         $this->ownedstatusID = $ownedstatusID;
 
-        return redirect()->to('/Books/o' . $ownedstatusID);
+        return redirect()->to('/Books/o'.$ownedstatusID);
 
     }
 
     // Display the current genre name for editing
-    //   edit-genre modal included in main blade file 
+    //   edit-genre modal included in main blade file
     public function ownedstatusEdit(int $ownedstatusID)
     {
         $this->ownedstatusID = $ownedstatusID;
@@ -76,7 +83,7 @@ class LWOwnedStatus extends Component
         $this->validate();
 
         Owned::where('id', $this->ownedstatusID)->update([
-            'owned_status' => $this->ownedstatusName
+            'owned_status' => $this->ownedstatusName,
         ]);
 
         session()->flash('message', 'Owned Status record updated');
@@ -95,7 +102,7 @@ class LWOwnedStatus extends Component
     {
         $this->ownedstatusID = $ownedstatusID;
         Book::where('owned_id', $this->ownedstatusID)->update([
-            'owned_id' => null
+            'owned_id' => null,
         ]);
 
         $ownedRecord = Owned::find($this->ownedstatusID);
@@ -103,6 +110,7 @@ class LWOwnedStatus extends Component
         $this->ownedstatusID = 1;
 
         session()->flash('message', 'Owned Status record deleted');
+
         return redirect()->to('/Owned');
     }
 }

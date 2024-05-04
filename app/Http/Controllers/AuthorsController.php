@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\author;
+use Illuminate\Http\Request;
 
 class AuthorsController extends Controller
 {
     /**
      * Display a listing of the authors and associated books.
-     * 
+     *
      * Initially, ID=1 is set to show the "default" missing author record
      *    and it's records
      *
@@ -35,7 +34,6 @@ class AuthorsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -51,7 +49,7 @@ class AuthorsController extends Controller
      */
     public function show(Request $request, $id)
     {
-        // 
+        //
     }
 
     /**
@@ -68,7 +66,6 @@ class AuthorsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

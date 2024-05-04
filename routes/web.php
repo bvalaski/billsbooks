@@ -1,10 +1,8 @@
 <?php
 
-use App\Http\Livewire\LWAuthors;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',        [PagesController::class,'index']);
-Route::get('/home',    [PagesController::class,'home']);
+Route::get('/', [PagesController::class, 'index']);
+Route::get('/home', [PagesController::class, 'home']);
 // Route::get('/authors', [PagesController::class,'authors']);
 // Route::get('/genres',  [PagesController::class,'genres']);
 // Route::get('/series',  [PagesController::class,'series']);
@@ -26,15 +24,15 @@ Route::get('/home',    [PagesController::class,'home']);
 
 // Route::get('/Books/filter', [BooksController::class, 'filter']);
 
-Route::get('/LWAuthors', function (){
+Route::get('/LWAuthors', function () {
     return view('authors.lwauth');
 });
 
-Route::Resource('Books', 'App\Http\Controllers\BooksController');
-Route::Resource('Genres', 'App\Http\Controllers\GenresController');
-Route::Resource('Authors', 'App\Http\Controllers\AuthorsController');
-Route::Resource('Series', 'App\Http\Controllers\SeriesController');
-Route::Resource('Owned', 'App\Http\Controllers\OwnedController');
+Route::Resource('Books', \App\Http\Controllers\BooksController::class);
+Route::Resource('Genres', \App\Http\Controllers\GenresController::class);
+Route::Resource('Authors', \App\Http\Controllers\AuthorsController::class);
+Route::Resource('Series', \App\Http\Controllers\SeriesController::class);
+Route::Resource('Owned', \App\Http\Controllers\OwnedController::class);
 
 // Auth::routes();
 

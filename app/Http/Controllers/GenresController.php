@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\genre;
+use Illuminate\Http\Request;
 
 class GenresController extends Controller
 {
@@ -18,15 +17,15 @@ class GenresController extends Controller
     {
         //
 
-        $genre_book_count = genre::select("id","genre")->withCount('book')->get();
-        
-     //   $books = Book::latest();
-     //   $books = $books->orderByDesc('date_read')->paginate(10);
-    
-     //   return view('books.index', compact(['books']));
-        
+        $genre_book_count = genre::select('id', 'genre')->withCount('book')->get();
+
+        //   $books = Book::latest();
+        //   $books = $books->orderByDesc('date_read')->paginate(10);
+
+        //   return view('books.index', compact(['books']));
+
         return view('genres.index', compact(['genre_book_count']));
- 
+
     }
 
     /**
@@ -42,7 +41,6 @@ class GenresController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -75,7 +73,6 @@ class GenresController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

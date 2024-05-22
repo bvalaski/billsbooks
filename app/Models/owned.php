@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
 
 class Owned extends Model
@@ -12,7 +13,7 @@ class Owned extends Model
 
     public $timestamps = false;
 
-    public function book()
+    public function book(): HasMany
     {
         return $this->hasMany(book::class);
     }

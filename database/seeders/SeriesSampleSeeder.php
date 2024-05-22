@@ -12,7 +12,7 @@ class SeriesSampleSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         DB::table('series')->insert([
             ['id' => 4, 'series' => 'Anita Blake'],

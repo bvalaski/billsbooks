@@ -12,7 +12,7 @@ class AuthorsSampleSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         DB::table('authors')->insert([
             ['id' => 5, 'lastname' => 'Asher', 'firstname' => 'Neal'],

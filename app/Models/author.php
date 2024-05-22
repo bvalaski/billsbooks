@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
 
 class Author extends Model
 {
     protected $fillable = ['firstname', 'lastname'];
 
-    public function book()
+    public function book(): HasMany
     {
         return $this->hasMany(book::class);
     }

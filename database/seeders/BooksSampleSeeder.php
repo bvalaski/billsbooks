@@ -13,8 +13,6 @@ class BooksSampleSeeder extends Seeder
 {
     /**
      * Sample collection of books for review of the app features.
-     *
-     * @return void
      */
     public function run(): void
     {

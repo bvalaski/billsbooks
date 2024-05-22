@@ -9,8 +9,6 @@ class AuthorsSampleSeeder extends Seeder
 {
     /**
      * Authors matching the sample books data.
-     *
-     * @return void
      */
     public function run(): void
     {

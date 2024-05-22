@@ -16,8 +16,6 @@ class BooksController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index(): View
     {
@@ -31,8 +29,6 @@ class BooksController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create(): View
     {
@@ -48,8 +44,6 @@ class BooksController extends Controller
     /**
      * Store a newly created resource in storage.
      *   MAKE SURE to update the validation in the update function
-     *
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request): RedirectResponse
     {
@@ -102,9 +96,6 @@ class BooksController extends Controller
      * Display the specified book record based on ID.
      *   If the ID starts with a letter, display a filtered list
      *   of Genre, Owned, or Series
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function show(int $id): View
     {
@@ -162,9 +153,6 @@ class BooksController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function edit(int $id): View
     {
@@ -225,9 +213,6 @@ class BooksController extends Controller
      * Update the specified resource in storage and clean up any
      *   un-selected choices
      *   MAKE SURE to update the validation in the store function
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, int $id): RedirectResponse
     {
@@ -283,9 +268,6 @@ class BooksController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy(int $id): RedirectResponse
     {

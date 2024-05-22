@@ -9,8 +9,6 @@ class SeriesSampleSeeder extends Seeder
 {
     /**
      * Add records for series associated with sample books.
-     *
-     * @return void
      */
     public function run(): void
     {

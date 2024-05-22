@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Models\author;
 use App\Models\book;
 use App\Models\genre;
@@ -17,7 +19,7 @@ class BooksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
 
         $books = Book::with('Author')->with('Genre')->orderByDesc('date_read')->paginate(10);
@@ -32,7 +34,7 @@ class BooksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         $auth_list = DB::table('authors')->orderBy('lastname')->get();
         $coauth_list = DB::table('authors')->orderBy('lastname')->get();
@@ -49,7 +51,7 @@ class BooksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
 
         $new_author_id = $request->input('author_id');
@@ -104,7 +106,7 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id): View
     {
         if (! session()->has('book_url')) {
             session()->put('book_url', url()->current());
@@ -164,7 +166,7 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id): View
     {
         if (! session()->has('book_url')) {
             session()->put('book_url', url()->current());
@@ -227,7 +229,7 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id): RedirectResponse
     {
         //       dd($request->all());
 
@@ -285,7 +287,7 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id): RedirectResponse
     {
         $book = Book::find($id);
         $book->delete();

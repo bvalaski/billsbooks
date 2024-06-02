@@ -15,7 +15,8 @@
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
         "livewire/livewire": "^2.11",
-        "phpactor/language-server": "^2.2"
+        "monolog/monolog": "^3.0",
+        "psr/log": "^2.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8",

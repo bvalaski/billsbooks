@@ -9,10 +9,8 @@ class SeriesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         DB::table('series')->insert([
             ['id' => 1, 'series' => 'Individual story'],

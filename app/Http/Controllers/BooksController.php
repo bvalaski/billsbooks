@@ -6,18 +6,18 @@ use App\Models\author;
 use App\Models\book;
 use App\Models\genre;
 use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\View\View;
 
 class BooksController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
 
         $books = Book::with('Author')->with('Genre')->orderByDesc('date_read')->paginate(10);
@@ -29,10 +29,8 @@ class BooksController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         $auth_list = DB::table('authors')->orderBy('lastname')->get();
         $coauth_list = DB::table('authors')->orderBy('lastname')->get();
@@ -46,10 +44,8 @@ class BooksController extends Controller
     /**
      * Store a newly created resource in storage.
      *   MAKE SURE to update the validation in the update function
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
 
         $new_author_id = $request->input('author_id');
@@ -100,11 +96,8 @@ class BooksController extends Controller
      * Display the specified book record based on ID.
      *   If the ID starts with a letter, display a filtered list
      *   of Genre, Owned, or Series
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id): View
     {
         if (! session()->has('book_url')) {
             session()->put('book_url', url()->current());
@@ -160,11 +153,8 @@ class BooksController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id): View
     {
         if (! session()->has('book_url')) {
             session()->put('book_url', url()->current());
@@ -223,11 +213,8 @@ class BooksController extends Controller
      * Update the specified resource in storage and clean up any
      *   un-selected choices
      *   MAKE SURE to update the validation in the store function
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id): RedirectResponse
     {
         //       dd($request->all());
 
@@ -281,11 +268,8 @@ class BooksController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id): RedirectResponse
     {
         $book = Book::find($id);
         $book->delete();

@@ -3,33 +3,34 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Book extends Model
 {
     protected $fillable = ['title', 'isbn', 'published', 'date_read', 'rating', 'genre_id', 'author_id',
         'coauthor_id', 'series_id', 'owned_id', 'comments'];
 
-    public function genre()
+    public function genre(): HasOne
     {
         return $this->hasOne(genre::class, 'id', 'genre_id');
     }
 
-    public function author()
+    public function author(): HasOne
     {
         return $this->hasOne(author::class, 'id', 'author_id');
     }
 
-    public function coauthor()
+    public function coauthor(): HasOne
     {
         return $this->hasOne(author::class, 'id', 'coauthor_id');
     }
 
-    public function series()
+    public function series(): HasOne
     {
         return $this->hasOne(series::class, 'id', 'series_id');
     }
 
-    public function owned()
+    public function owned(): HasOne
     {
         return $this->hasOne(owned::class, 'id', 'owned_id');
     }

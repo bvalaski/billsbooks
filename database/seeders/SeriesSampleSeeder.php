@@ -9,10 +9,8 @@ class SeriesSampleSeeder extends Seeder
 {
     /**
      * Add records for series associated with sample books.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         DB::table('series')->insert([
             ['id' => 4, 'series' => 'Anita Blake'],

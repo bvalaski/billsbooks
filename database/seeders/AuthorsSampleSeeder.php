@@ -9,10 +9,8 @@ class AuthorsSampleSeeder extends Seeder
 {
     /**
      * Authors matching the sample books data.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         DB::table('authors')->insert([
             ['id' => 5, 'lastname' => 'Asher', 'firstname' => 'Neal'],

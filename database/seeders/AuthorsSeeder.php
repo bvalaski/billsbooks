@@ -9,10 +9,8 @@ class AuthorsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         DB::table('authors')->insert([
             ['id' => 1, 'lastname' => 'Author', 'firstname' => 'Missing'],

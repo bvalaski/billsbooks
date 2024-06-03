@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Genre extends Model
 {
@@ -10,7 +11,7 @@ class Genre extends Model
 
     protected $fillable = ['genre'];
 
-    public function book()
+    public function book(): HasMany
     {
         return $this->hasMany(book::class);
     }

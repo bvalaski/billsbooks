@@ -9,10 +9,8 @@ class OwnedSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         DB::table('owned')->insert([
             ['id' => 1, 'owned_status' => 'No'],

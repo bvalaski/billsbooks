@@ -13,10 +13,8 @@ class BooksSampleSeeder extends Seeder
 {
     /**
      * Sample collection of books for review of the app features.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         DB::table('books')->insert([
             ['title' => 'Brass Man', 'author_id' => 5, 'coauthor_id' => 1, 'published' => 0, 'rating' => 2, 'comments' => "'The Brass golem tangles with Dragon and Ian Cormac during a Jain technology problem'", 'date_read' => '2017-09-10', 'genre_id' => 3, 'series_id' => 1, 'owned_id' => 1, 'isbn' => "'null'"],
